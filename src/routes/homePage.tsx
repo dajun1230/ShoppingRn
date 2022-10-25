@@ -4,9 +4,33 @@ import IonIcons from 'react-native-vector-icons/AntDesign';
 
 const HomePage = ({navigation}: any) => {
   return (
-    <View style={{flex: 1, backgroundColor:"gray", paddingTop: 30}}>
+    <View style={{flex: 1, paddingTop: 30}}>
       <Text style={styles.text}>欢迎来到HomePage</Text>
       <IonIcons name="staro" size={50} style={{color: 'red'}} />
+      <Button 
+        title='tabbar导航器'
+        onPress={() => {
+          navigation.navigate('BottomNavPage');
+        }}
+      />
+      <Button 
+        title='顶部导航器'
+        onPress={() => {
+          navigation.navigate('MaterialTopTabPage');
+        }}
+      />
+      <Button 
+        title='底部导航器'
+        onPress={() => {
+          navigation.navigate('MaterialBottomTabPage');
+        }}
+      />
+      <Button 
+        title='抽屉导航器'
+        onPress={() => {
+          navigation.navigate('DrawerPage');
+        }}
+      />
       <Button 
         title='Go Page1'
         onPress={() => {

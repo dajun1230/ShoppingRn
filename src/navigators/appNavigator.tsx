@@ -1,20 +1,45 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomePage from '../routes/homePage';
+import BottomNavPage from '../routes/bottomNavPage';
+import MaterialTopTabPage from '../routes/materialTopTabPage';
+import MaterialBottomTabPage from '../routes/materialBottomTabPage';
+import DrawerPage from '../routes/drawerPage';
 import Page1 from '../routes/page1';
 import Page2 from '../routes/page2';
 import Page3 from '../routes/page3';
 import { Button, Text, View } from 'react-native';
 
 const Stack = createNativeStackNavigator();
-const TabStack = createBottomTabNavigator();
+
 
 const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="HomePage">
+        {/* 顶部导航栏 */}
+        <Stack.Screen
+          name="MaterialTopTabPage"
+          component={MaterialTopTabPage}
+        />
+        {/* 底部导航栏 */}
+        <Stack.Screen
+          name="MaterialBottomTabPage"
+          component={MaterialBottomTabPage}
+        />
+        {/* tabbar导航栏 */}
+        <Stack.Screen
+          name="BottomNavPage"
+          component={BottomNavPage}
+          options={{headerShown: false}}
+        />
+        {/* 抽屉导航栏 */}
+        <Stack.Screen
+          name="DrawerPage"
+          component={DrawerPage}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="HomePage"
           component={HomePage}

@@ -10,90 +10,86 @@ import MyPage from '../pages/my';
 
 const Tab  = createBottomTabNavigator();
 
-// TODO: 在这里配置页面的路由
-const tabs = () => {
-return (
-  <Tab.Navigator
-      screenOptions={{
-        tabBarActiveTintColor: 'red',
-        // tabBarInactiveTintColor: 'green',
-        tabBarLabelStyle: { fontSize: 14 },
-      }}
-    >
-      <Tab.Screen
-        name='PopularPage'
-        component={PopularPage}
-        options={{
-          headerShown: false,
-          tabBarLabel: "最热",
-          tabBarIcon: ({ color }) => (
-            <MaterialIcons name="whatshot" size={24} style={{color}} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name='TrendPage'
-        component={TrendPage}
-        options={{
-          tabBarLabel: "趋势",
-          tabBarIcon: ({ color }) => (
-            <Ionicons name="md-trending-up-sharp" size={24} style={{color}} />
-          )
-        }}
-      />
-      <Tab.Screen
-        name='CollectionPage'
-        component={CollectionPage}
-        options={{
-          tabBarLabel: "收藏",
-          tabBarIcon: ({ color }) => (
-            <MaterialIcons name="favorite" size={24} style={{color}} />
-          )
-        }}
-      />
-      <Tab.Screen
-        name='MyPage'
-        component={MyPage}
-        options={{
-          tabBarLabel: "我的",
-          tabBarIcon: ({ color }) => (
-            <EntypoIcons name="user" size={24} style={{color}} />
-          )
-        }}
-      />
-    </Tab.Navigator>
-  )
-}
+const TABS = [
+  {
+    name: 'PopularPage',
+    component: PopularPage,
+    tabBarLabel: "最热",
+    headerShown: false,
+    tabBarIcon: ({ color }: any) => (
+      <MaterialIcons name="whatshot" size={24} style={{color}} />
+    )
+  },
+  {
+    name: 'TrendPage',
+    component: TrendPage,
+    tabBarLabel: "趋势",
+    headerShown: false,
+    tabBarIcon: ({ color }: any) => (
+      <Ionicons name="md-trending-up-sharp" size={24} style={{color}} />
+    )
+  },
+  {
+    name: 'CollectionPage',
+    component: CollectionPage,
+    tabBarLabel: "收藏",
+    headerShown: false,
+    tabBarIcon: ({ color }: any) => (
+      <MaterialIcons name="favorite" size={24} style={{color}} />
+    )
+  },
+  {
+    name: 'MyPage',
+    component: MyPage,
+    tabBarLabel: "我的",
+    headerShown: false,
+    tabBarIcon: ({ color }: any) => (
+      <EntypoIcons name="user" size={24} style={{color}} />
+    )
+  }
+];
 
-const DynamicTabNavigator = () => {
+// const TabBarComponent = (props: any) => {
+//   return (
+//     <BottomTabBar
+//       {...props}
+//      />
+//   );
+// }
+
+const DynamicTabNavigator = ({ navigation }: any) => {
+
+  const tabs = () => {
+    return (
+      <Tab.Navigator
+        screenOptions={{
+          tabBarActiveTintColor: 'red',
+          // tabBarInactiveTintColor: 'green',
+          tabBarLabelStyle: { fontSize: 14 },
+        }}
+        // tabBar={TabBarComponent}
+      >
+        {TABS.map(item => {
+          return (
+            <Tab.Screen
+              key={item.name}
+              name={item.name}
+              component={item.component}
+              options={{
+                headerShown: item.headerShown,
+                tabBarLabel: item.tabBarLabel,
+                tabBarIcon: item.tabBarIcon,
+              }}
+            />
+          )
+        })}
+      </Tab.Navigator>
+    )
+  }
 
   const TabNavigator = tabs();
 
   return TabNavigator;
-}
-
-const TabBarComponent = (props: any) => {
-  console.log('TabBar:', props);
-  // let themeData = {
-  //   tintColor: props.activeTintColor,
-  //   updateTime: new Date().getTime()
-  // }
-
-  // const { routes, index } = props.navigation.state;
-  // if (routes[index].params) {
-  //   const { theme } = routes[index].params;
-  //   // 以最新的更新时为主，防止被其他tab之前的修改覆盖掉
-  //   if (theme && theme.updateTime > themeData.updateTime) {
-  //     themeData = theme;
-  //   }
-  // }
-
-  return (
-    <BottomTabBar
-      {...props}
-      // activeTintColor={themeData.tintColor || props.activeTintColor}
-     />
-  );
 }
 
 export default DynamicTabNavigator;

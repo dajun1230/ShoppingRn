@@ -1,30 +1,50 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { navigate } from 'utils/navigationService';
 
 const Tab = createMaterialTopTabNavigator();
 
 const tabNavigator = () => {
+  const tabNames = [ 'Java', 'Android', "iOS", 'React', 'React Native', 'PHP' ];
+
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="PopularTab1" component={PopularTab1} options={{title: "Tab1"}}  />
-      <Tab.Screen name="PopularTab2" component={PopularTab2} options={{title: "Tab2"}}  />
+    <Tab.Navigator
+      tabBarPosition='top'
+      screenOptions={{
+        tabBarStyle: {
+          minWidth: 50,
+          backgroundColor: '#a67'
+        },
+        tabBarScrollEnabled: true,
+        tabBarIndicatorStyle: styles.indicatorStyle,
+        tabBarLabelStyle: styles.labelStyle
+      }}
+    >
+      { 
+        tabNames.map((item) => {
+          return (
+            <Tab.Screen 
+              key={item}
+              name={item}
+              options={{title: item}} 
+            >
+              { (props) => <PopularTab {...props} tabLabel={item} />}
+            </Tab.Screen>
+          )
+        })
+      }
     </Tab.Navigator>
   )
 }
 
-const PopularTab1 = () => {
+const PopularTab = ({ tabLabel }: any) => {
   return (
     <View>
-      <Text>Tab1</Text>
-    </View>
-  )
-}
-
-const PopularTab2 = () => {
-  return (
-    <View>
-      <Text>Tab2</Text>
+      <Text>{tabLabel}</Text>
+      <Text onPress={() => {
+        navigate("DetailPage");
+      }}>跳转到详情页</Text>
     </View>
   )
 }
@@ -49,6 +69,18 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10
+  },
+  tabStyle: {
+    minWidth: 50
+  },
+  indicatorStyle: {
+    height: 2,
+    backgroundColor: 'white'
+  },
+  labelStyle: {
+    fontSize: 14,
+    marginTop: 6,
+    marginBottom: 6,
   }
 })
 

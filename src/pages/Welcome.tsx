@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import NavigationUtil from '../navigator/NavigationUtil';
+import { navigate } from 'utils/navigationService';
 
 const WelcomePage = (props: any) => {
   
   useEffect(() => {
     const timer = setTimeout(() => {
       // 跳转到首页
-      NavigationUtil.resetToHomePage(props);
+      navigate('HomePage');
     }, 2000);
     return () => {
       // 页面销毁时，清空定时器

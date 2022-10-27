@@ -1,14 +1,20 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import DynamicTabNavigator from '../navigator/DynamicTabNavigator';
+import NavigationUtil from '../navigator/NavigationUtil';
 
-const HomePage: React.FC = () => {
+interface Props {
+  navigation: any;
+}
+
+const HomePage: React.FC<Props> = ({ navigation }) => {
 
   // return (
   //   <View style={styles.container}>
   //     <Text style={styles.welcome}>主页</Text>
   //   </View>
   // )
+
   return <DynamicTabNavigator />;
 }
 

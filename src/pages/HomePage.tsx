@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import DynamicTabNavigator from '../navigator/DynamicTabNavigator';
-import NavigationUtil from '../navigator/NavigationUtil';
+import TabNavNavigator from '@/navigator/TabNavNavigator';
 
 interface Props {
   navigation: any;
@@ -15,7 +15,7 @@ const HomePage: React.FC<Props> = ({ navigation }) => {
   //   </View>
   // )
 
-  return <DynamicTabNavigator />;
+  return <TabNavNavigator />;
 }
 
 const styles = StyleSheet.create({
